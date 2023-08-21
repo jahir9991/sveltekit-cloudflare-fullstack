@@ -981,6 +981,11 @@ capnp-ts@^0.7.0:
     debug "^4.3.1"
     tslib "^2.2.0"
 
+cf-workers-proxy@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/cf-workers-proxy/-/cf-workers-proxy-0.5.7.tgz#10d5db4db7491db113171e05b3dc4dacbe14f2a5"
+  integrity sha512-AzIUYrW+16Ndj0yRgWmRk8SOgcSlpfUJxH7LG49Oo1UrZn151+hroj8pjLNHvSc8wnBzGV1mmy6nlbjt5RKa7Q==
+
 chai@^4.3.7:
   version "4.3.7"
   resolved "https://registry.yarnpkg.com/chai/-/chai-4.3.7.tgz#ec63f6df01829088e8bf55fca839bcd464a8ec51"

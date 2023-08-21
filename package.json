@@ -4,9 +4,9 @@
 	"license": "Apache-2.0",
 	"scripts": {
 		"start": "vite dev",
+		"server":"wrangler dev --remote",
 		"build": "vite build",
 		"build:w": "vite build --watch",
-		"wr": "wrangler pages dev .svelte-kit/cloudflare --local",
 		"preview": "vite preview",
 		"gen": "drizzle-kit generate:sqlite --out migrations --schema=src/schema.ts",
 		"mig:dev": "wrangler d1 migrations apply cloudflare_fullstack_db --local",
@@ -29,6 +29,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"better-sqlite3": "8.0.1",
+		"cf-workers-proxy": "^0.5.7",
 		"drizzle-kit": "^0.19.13",
 		"drizzle-orm": "^0.28.2",
 		"eslint": "^8.28.0",
