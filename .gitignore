@@ -12,5 +12,6 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .wrangler
 /.wrangler
+wrangler.toml
 
 

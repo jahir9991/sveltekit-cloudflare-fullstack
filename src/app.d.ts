@@ -8,10 +8,14 @@ declare global {
 		interface Platform {
 			env?: {
 				DB: D1Database;
+				cloudflare_fullstack_kv: KVNamespace
+			};
+			context: {
+				waitUntil(promise: Promise<any>): void;
 			};
 		}
 	}
-	
+
 }
 
-export {};
+export { };

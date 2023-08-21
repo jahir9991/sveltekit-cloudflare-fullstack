@@ -7,3 +7,9 @@ binding="DB"
 database_name="cloudflare_fullstack_db"
 database_id="dc466e78-7d84-40bd-9731-04052d5b615b"#set the database id here
 preview_database_id="cloudflare_fullstack_db"# this is the local db 
+
+
+[[kv_namespaces]]
+binding = "cloudflare_fullstack_kv"
+id = "ac5ef8073e3a4sdsdsdsdsdsds" # remote id
+preview_id = "ac5ef8073e3a4esdsdsdsdsd" # local id
