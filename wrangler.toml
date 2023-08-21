@@ -1,9 +1,0 @@
-name = "cloudflare-fullstack"
-main = "worker.ts"
-compatibility_date = "2023-08-14"
-node_compat = true
-
-[[d1_databases]]
-binding = "DB"
-database_name = "cloudflare_fullstack_db"
-database_id = "ee35bbbf-73e5-4d59-aee9-c471675dcf15" 
