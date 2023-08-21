@@ -1,0 +1,9 @@
+name = "cloudflare-fullstack"
+compatibility_date ="2023-08-14"
+node_compat = true
+ 
+[[d1_databases]]
+binding="DB"
+database_name="cloudflare_fullstack_db"
+database_id="dc466e78-7d84-40bd-9731-04052d5b615b"#set the database id here
+preview_database_id="cloudflare_fullstack_db"# this is the local db 
