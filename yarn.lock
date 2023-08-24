@@ -2924,6 +2924,11 @@ worktop@0.8.0-next.15:
     mrmime "^1.0.0"
     regexparam "^2.0.0"
 
+wrangler-proxy@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/wrangler-proxy/-/wrangler-proxy-0.6.4.tgz#90b5b7efaa65a759a0717b0621ecff5668639337"
+  integrity sha512-mfSYHoRsJJgS7CcUnxZZ1pU6nABMCVD+ss13m4dZTBLmoXQ8QZ3lnxkFplm3xdOe0PtqbjXFuvVUgZEYeGJocA==
+
 wrangler@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/wrangler/-/wrangler-3.5.1.tgz#e7835f964e061b86695c1b6f6fa799e8281e77f8"
