@@ -1,18 +1,14 @@
 import { json } from "@sveltejs/kit";
 
-import { connectKV } from 'wrangler-proxy'
-import { KVCrudService } from "../../../libs/kv/kvService.js";
+import { KVCrudService, type User } from "../../../libs/kv/kvService.js";
 
-interface User {
-    // Objects going into the CRUD service must have an ID
-    id: string
-    name: string
-}
 
-export async function GET({ platform, url }) {
+
+export async function GET({ url, locals }) {
     try {
 
-        const kv = platform?.env?.cloudflare_fullstack_kv ?? connectKV('cloudflare_fullstack_kv', { hostname: 'http://127.0.0.1:8787' });
+        if (!locals.KV) throw new Error("no kv found");
+        const kv = locals.KV;
 
         const usersService = new KVCrudService<User>({
             kv,
@@ -30,9 +26,10 @@ export async function GET({ platform, url }) {
     }
 }
 
-export async function POST({ request, platform }) {
+export async function POST({ request, locals }) {
     try {
-        const kv = platform?.env?.cloudflare_fullstack_kv ?? connectKV('cloudflare_fullstack_kv', { hostname: 'http://127.0.0.1:8787' });
+        if (!locals.KV) throw new Error("no kv found");
+        const kv = locals.KV;
 
         const usersService = new KVCrudService<User>({
             kv,

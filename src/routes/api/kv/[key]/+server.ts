@@ -1,17 +1,15 @@
 import { json } from '@sveltejs/kit';
-import { connectKV } from 'wrangler-proxy';
-import { KVCrudService } from '../../../../libs/kv/kvService.js';
+import { KVCrudService, type User } from '../../../../libs/kv/kvService.js';
 
 
-interface User {
-    // Objects going into the CRUD service must have an ID
-    id: string
-    name: string
-}
 
-export async function GET({ platform, params }) {
+
+export async function GET({ params, locals }) {
     try {
-        const kv = platform?.env?.cloudflare_fullstack_kv ?? connectKV('cloudflare_fullstack_kv', { hostname: 'http://127.0.0.1:8787' });
+        if (!locals.KV) throw new Error("no kv found");
+        const kv = locals.KV;
+
+
         const usersService = new KVCrudService<User>({
             kv,
             objectPrefix: 'users',
@@ -34,10 +32,10 @@ export async function GET({ platform, params }) {
     }
 }
 
-export async function PUT({ request, platform, params }) {
+export async function PUT({ request, params, locals }) {
     try {
-        const kv = platform?.env?.cloudflare_fullstack_kv ?? connectKV('cloudflare_fullstack_kv', { hostname: 'http://127.0.0.1:8787' });
-
+        if (!locals.KV) throw new Error("no kv found");
+        const kv = locals.KV;
 
         const usersService = new KVCrudService<User>({
             kv,
@@ -65,9 +63,10 @@ export async function PUT({ request, platform, params }) {
 }
 
 
-export async function DELETE({ request, platform, params }) {
+export async function DELETE({  params, locals }) {
     try {
-        const kv = platform?.env?.cloudflare_fullstack_kv ?? connectKV('cloudflare_fullstack_kv', { hostname: 'http://127.0.0.1:8787' });
+        if (!locals.KV) throw new Error("no kv found");
+        const kv = locals.KV;
 
         const usersService = new KVCrudService<User>({
             kv,

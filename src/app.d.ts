@@ -3,16 +3,20 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		// interface Locals {}
+		interface Locals {
+			DB: DrizzleD1Database
+			KV: KVNamespace
+		}
 		// interface PageData {}
 		interface Platform {
 			env?: {
 				DB: D1Database;
-				cloudflare_fullstack_kv: KVNamespace
+				KV: KVNamespace
 			};
 			context: {
 				waitUntil(promise: Promise<any>): void;
 			};
+			caches: CacheStorage & { default: Cache };
 		}
 	}
 

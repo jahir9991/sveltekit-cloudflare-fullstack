@@ -4,7 +4,8 @@
 	"license": "Apache-2.0",
 	"scripts": {
 		"start": "vite dev",
-		"server": "wrangler dev node_modules/wrangler-proxy/dist/worker.js --remote",
+		"proxy": "wrangler dev node_modules/wrangler-proxy/dist/worker.js --remote",
+		"bridge": "wrangler dev node_modules/cfw-bindings-wrangler-bridge/worker.js --remote",
 		"build": "vite build",
 		"build:w": "vite build --watch",
 		"preview": "vite preview",
@@ -29,6 +30,7 @@
 		"@typescript-eslint/eslint-plugin": "^6.4.0",
 		"@typescript-eslint/parser": "^6.4.0",
 		"better-sqlite3": "8.5.1",
+		"cfw-bindings-wrangler-bridge": "^0.7.0",
 		"drizzle-kit": "^0.19.13",
 		"drizzle-orm": "^0.28.5",
 		"eslint": "^8.47.0",
@@ -43,7 +45,7 @@
 		"vite": "^4.4.9",
 		"vitest": "^0.34.2",
 		"wrangler": "^3.5.1",
-		"wrangler-proxy": "^2.1.1"
+		"wrangler-proxy": "^2.1.3"
 	},
 	"type": "module"
 }
