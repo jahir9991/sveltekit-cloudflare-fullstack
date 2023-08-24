@@ -1,3 +1,9 @@
+export interface User {
+    // Objects going into the CRUD service must have an ID
+    id: string
+    name: string
+}
+
 
 export interface KVCrudServiceOptions {
     kv: KVNamespace
@@ -13,8 +19,8 @@ export class KVCrudService<T extends { id: string }> {
 
     async list(): Promise<T[]> {
         const { kv, objectPrefix } = this.options
-        const _ids = (await kv.get(objectPrefix, 'arrayBuffer')) as unknown as string;
-        const ids: string[] = _ids ? JSON.parse(_ids) : [];
+        const ids = (await kv.get(objectPrefix, 'json')) as [];
+        console.log("🚀 ~ file: kvService.ts:24 ~ KVCrudService<T ~ list ~ d:", ids)
 
         const fetchObjects = ids.map(async id => {
             const obj = await kv.get(`${objectPrefix}-${id}`);
@@ -27,23 +33,22 @@ export class KVCrudService<T extends { id: string }> {
 
         });
         const data = await Promise.all(fetchObjects)
-        const cl = data.filter((src) => {
-            return src;
-        });
+        const cl = data.filter((src) => src);
+
 
         return cl;
     }
 
     async get(id: string): Promise<T | undefined> {
         const { kv, objectPrefix } = this.options
-        const result = await kv.get(`${objectPrefix}-${id}`,);
+        const result = await kv.get(`${objectPrefix}-${id}`);
         return String(result) === "" ? null : JSON.parse(result) as T;
     }
 
     async create(obj: T) {
         const { kv, objectPrefix } = this.options
-        const _ids = (await kv.get(objectPrefix, 'arrayBuffer')) as unknown as string;
-        const ids: string[] = _ids ? JSON.parse(_ids) : [];
+        const ids: any = (await kv.get(objectPrefix, 'json'));
+        console.log("🚀 ~ file: kvService.ts:51 ~ KVCrudService<T ~ create ~ ids:", ids)
 
         await Promise.all([
             kv.put(`${objectPrefix}-${obj.id}`, JSON.stringify(obj)),
@@ -52,10 +57,11 @@ export class KVCrudService<T extends { id: string }> {
                 : Promise.resolve(),
         ])
     }
+
     async edit(obj: T) {
         const { kv, objectPrefix } = this.options
-        const _ids = (await kv.get(objectPrefix, 'arrayBuffer')) as unknown as string;
-        const ids: string[] = _ids ? JSON.parse(_ids) : [];
+        const ids: any = (await kv.get(objectPrefix, 'json')) || [];
+
 
         await Promise.all([
             kv.put(`${objectPrefix}-${obj.id}`, JSON.stringify(obj)),
@@ -70,8 +76,7 @@ export class KVCrudService<T extends { id: string }> {
         const { kv, objectPrefix } = this.options
         await kv.delete(`${objectPrefix}-${id}`);
 
-        const _ids = (await kv.get(objectPrefix, 'arrayBuffer')) as unknown as string;
-        const ids: string[] = _ids ? JSON.parse(_ids) : [];
+        const ids: [] = (await kv.get(objectPrefix, 'json')) || [];
 
         await kv.put(objectPrefix, JSON.stringify(ids.filter(_id => _id !== id)))
 

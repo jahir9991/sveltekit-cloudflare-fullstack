@@ -1,23 +1,19 @@
 import { json } from "@sveltejs/kit";
 import { User } from '../../../schema'
-
-import { drizzle } from 'drizzle-orm/d1'
-
-import { connectD1 } from 'wrangler-proxy'
+// import { connectD1 } from 'wrangler-proxy'
 import { like } from "drizzle-orm";
 
-export async function GET({ platform, url }) {
+export async function GET({ url, locals }) {
     try {
-
-        const myDb = platform?.env?.DB ?? connectD1('DB', { hostname: 'http://127.0.0.1:8787' });
-        const db = await drizzle(myDb);
+        if (!locals.DB) throw new Error("no db found");
+        const DB = locals.DB;
 
         const searchTerm = url.searchParams.get('q') ?? "";
         const limit: number = Number(url.searchParams.get('limit') ?? 10);
         const page: number = Number(url.searchParams.get('page') ?? 1);
 
 
-        const result = await db.select().from(User)
+        const result = await DB.select().from(User)
             .where(like(User.name, `%${searchTerm}%`))
             .limit(limit)
             .offset((page - 1) * limit)
@@ -35,13 +31,13 @@ export async function GET({ platform, url }) {
     }
 }
 
-export async function POST({ request, platform, }) {
+export async function POST({ request, locals }) {
     try {
+        if (!locals.DB) throw new Error("no db found");
+        const DB = locals.DB;
 
-        const myDb = platform?.env?.DB ?? connectD1('DB', { hostname: 'http://127.0.0.1:8787' });
-        const db = await drizzle(myDb);
         const { name, age }: { name: string, age: string } = await request.json();
-        const result = await db.insert(User).values({ name, age })
+        const result = await DB.insert(User).values({ name, age })
             .returning().get();
 
         return json(
