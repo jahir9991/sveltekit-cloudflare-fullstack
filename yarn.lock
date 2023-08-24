@@ -974,11 +974,6 @@ capnp-ts@^0.7.0:
     debug "^4.3.1"
     tslib "^2.2.0"
 
-cf-workers-proxy@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/cf-workers-proxy/-/cf-workers-proxy-0.6.1.tgz#98bf7205c53bd5e6a91a60b43a520b408738bf89"
-  integrity sha512-bihxKgwuzyBiYj/HVfwK+WxJ5fuyZJS2AQifT3xs4aQWHbSp/WGRZDN7vpdIljX5T6J16Dk08iEOnDuqge6bpA==
-
 chai@^4.3.7:
   version "4.3.7"
   resolved "https://registry.yarnpkg.com/chai/-/chai-4.3.7.tgz#ec63f6df01829088e8bf55fca839bcd464a8ec51"
@@ -1221,10 +1216,10 @@ drizzle-kit@^0.19.13:
     minimatch "^7.4.3"
     zod "^3.20.2"
 
-drizzle-orm@^0.28.2:
-  version "0.28.2"
-  resolved "https://registry.yarnpkg.com/drizzle-orm/-/drizzle-orm-0.28.2.tgz#58c3bd2648a026732ec8df79a10766f7fa1b2246"
-  integrity sha512-QRyuzvpJr7GE6LpvZ/sg2nAKNg2if1uGGkgFTiXn4auuYId//vVJe6HBsDTktfKfcaDGzIYos+/f+PS5EkBmrg==
+drizzle-orm@^0.28.5:
+  version "0.28.5"
+  resolved "https://registry.yarnpkg.com/drizzle-orm/-/drizzle-orm-0.28.5.tgz#67aa2a0fbe7d7a2066856188c2ac48106e14046f"
+  integrity sha512-6r6Iw4c38NAmW6TiKH3TUpGUQ1YdlEoLJOQptn8XPx3Z63+vFNKfAiANqrIiYZiMjKR9+NYAL219nFrmo1duXA==
 
 end-of-stream@^1.1.0, end-of-stream@^1.4.1:
   version "1.4.4"
@@ -2924,10 +2919,10 @@ worktop@0.8.0-next.15:
     mrmime "^1.0.0"
     regexparam "^2.0.0"
 
-wrangler-proxy@^0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/wrangler-proxy/-/wrangler-proxy-0.6.4.tgz#90b5b7efaa65a759a0717b0621ecff5668639337"
-  integrity sha512-mfSYHoRsJJgS7CcUnxZZ1pU6nABMCVD+ss13m4dZTBLmoXQ8QZ3lnxkFplm3xdOe0PtqbjXFuvVUgZEYeGJocA==
+wrangler-proxy@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/wrangler-proxy/-/wrangler-proxy-2.1.1.tgz#a67559d82d8ba14f10b1f945a0da3c61cbc7f033"
+  integrity sha512-Q6zq0ZZKFuMS/LdHCx7JjEqdHV7v6PmQAB2v2Ri1TBMh64tghYEz7NiDq77bSVfAcwxeQeJOjE6JqBoEx9P+0w==
 
 wrangler@^3.5.1:
   version "3.5.1"

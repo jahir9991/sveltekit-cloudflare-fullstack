@@ -1,25 +1,28 @@
 import { json } from "@sveltejs/kit";
 
+import { connectKV } from 'wrangler-proxy'
+import { KVCrudService } from "../../../libs/kv/kvService.js";
 
-
-import { createKV } from 'cf-workers-proxy'
+interface User {
+    // Objects going into the CRUD service must have an ID
+    id: string
+    name: string
+}
 
 export async function GET({ platform, url }) {
     try {
-        const kv = platform?.env?.cloudflare_fullstack_kv ?? createKV('cloudflare_fullstack_kv', { hostname: 'http://127.0.0.1:8787' });
 
+        const kv = platform?.env?.cloudflare_fullstack_kv ?? connectKV('cloudflare_fullstack_kv', { hostname: 'http://127.0.0.1:8787' });
 
-        const key = url.searchParams.get('key')
+        const usersService = new KVCrudService<User>({
+            kv,
+            objectPrefix: 'users',
+        })
 
-        const result = await kv.get(key);
-
-
-
+        const users = await usersService.list()
         return json(
             {
-                payload: {
-                    [key]: result
-                }
+                payload: users
             }
         )
     } catch (error) {
@@ -29,15 +32,22 @@ export async function GET({ platform, url }) {
 
 export async function POST({ request, platform }) {
     try {
-        const kv = platform?.env?.cloudflare_fullstack_kv ?? createKV('cloudflare_fullstack_kv', { hostname: 'http://127.0.0.1:8787' });
+        const kv = platform?.env?.cloudflare_fullstack_kv ?? connectKV('cloudflare_fullstack_kv', { hostname: 'http://127.0.0.1:8787' });
 
+        const usersService = new KVCrudService<User>({
+            kv,
+            objectPrefix: 'users',
+        })
 
-        const { key, value }: any = await request.json();
+        const { id, name }: { id: string, name: string } = await request.json();
 
-        console.log("key", key);
-        console.log("value", value);
+        console.log(id);
+        console.log(name);
 
-        const result = await kv.put(key, String(value));
+        const result = await usersService.create({
+            id: String(id),
+            name
+        })
 
         return json(
             {
@@ -45,7 +55,8 @@ export async function POST({ request, platform }) {
             }
         )
     } catch (error) {
-        return json({ error: error.message })
+        return json({ error: error.message }, { status: 400 })
     }
 }
+
 

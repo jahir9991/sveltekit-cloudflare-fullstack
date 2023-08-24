@@ -1,5 +1,10 @@
 module.exports = {
 	root: true,
+	rules: {
+		'@typescript-eslint/no-unused-vars':'warn',
+		'prefer-const':'warn',
+
+	},
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
