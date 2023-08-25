@@ -1,7 +1,6 @@
 import { json } from "@sveltejs/kit";
-import { User } from '../../../schema'
-// import { connectD1 } from 'wrangler-proxy'
-import { like } from "drizzle-orm";
+import { UserD1 } from '../../../db/schemas/schemaD1'
+import { like, sql } from "drizzle-orm";
 
 export async function GET({ url, locals }) {
     try {
@@ -12,15 +11,23 @@ export async function GET({ url, locals }) {
         const limit: number = Number(url.searchParams.get('limit') ?? 10);
         const page: number = Number(url.searchParams.get('page') ?? 1);
 
-
-        const result = await DB.select().from(User)
-            .where(like(User.name, `%${searchTerm}%`))
+        const result = await DB.select().from(UserD1)
+            .where(like(UserD1.name, `%${searchTerm}%`))
             .limit(limit)
             .offset((page - 1) * limit)
-            .all();
+
+        const [{ count }] = await DB.select(
+            { count: sql<number>`count(*)` }
+        ).from(UserD1)
+            .where(like(UserD1.name, `%${searchTerm}%`))
 
         return json(
             {
+                meta: {
+                    count,
+                    page,
+                    limit,
+                },
                 payload: result
             }
         )
@@ -37,12 +44,13 @@ export async function POST({ request, locals }) {
         const DB = locals.DB;
 
         const { name, age }: { name: string, age: string } = await request.json();
-        const result = await DB.insert(User).values({ name, age })
-            .returning().get();
+
+        const result = await DB.insert(UserD1).values({ name, age })
+            .returning();
 
         return json(
             {
-                payload: result
+                payload: result[0] ?? {}
             }
         )
     } catch (error) {
