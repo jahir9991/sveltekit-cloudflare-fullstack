@@ -22,7 +22,6 @@
 		"test:unit": "vitest"
 	},
 	"devDependencies": {
-		"@chientrm/postgres": "^3.4.0",
 		"@fontsource/fira-mono": "^5.0.8",
 		"@neoconfetti/svelte": "^1.0.0",
 		"@playwright/test": "^1.37.1",
@@ -39,7 +38,7 @@
 		"eslint": "^8.47.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-svelte": "^2.32.4",
-		"postgres": "^3.3.5",
+		"postgres": "https://github.com/porsager/postgres",
 		"prettier": "^3.0.2",
 		"prettier-plugin-svelte": "^3.0.3",
 		"svelte": "^4.2.0",
