@@ -27,7 +27,7 @@ DOCUMENTATION COMING SOON !!!!
 "@sveltejs/adapter-cloudflare-node": "https://github.com/wackfx/adapter-cloudflare-node",		
 
 #need to add this package for postgres 
-"@chientrm/postgres": "^3.4.0",
+"postgres": "^3.3.5",
 
 #need to add Compatibility flags in cf dashboard
 Compatibility flags: nodejs_compat
