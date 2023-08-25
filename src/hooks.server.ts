@@ -1,13 +1,13 @@
 import type { Handle } from "@sveltejs/kit";
 import { drizzle } from "drizzle-orm/d1";
-import { MYENV } from "./MYENV";
+import { SERVER_ENV } from "./SERVER_ENV";
 import { createBridge } from "cfw-bindings-wrangler-bridge";
 import { connectD1, connectKV } from "wrangler-proxy";
-// import { connectD1 } from "wrangler-proxy";
+import { ConnectSupabasePg } from "./db/connectPg";
 
-const hostname = 'http://127.0.0.1:8787';
+const hostname = "http://127.0.0.1:8787";
 
-const injectDB = async (event) => {
+const injectD1 = async (event) => {
 
   try {
     if (event.platform?.env?.DB) {
@@ -18,12 +18,12 @@ const injectDB = async (event) => {
       // event.locals.DB = drizzle(dd);
 
       //bridge
-      const bridge = createBridge(hostname);
+      const bridge = createBridge("http://127.0.0.1:8787");
       event.locals.DB = drizzle(bridge.D1Database('DB'))
     }
 
   } catch (error) {
-    console.log("🚀 ~ file: hooks.server.ts:12 ~ consthandle:Handle= ~ error:", error)
+    console.log("🚀 ~ file: hooks.server.ts:27 ~ consthandle:Handle= ~ error:", error)
 
   }
 
@@ -46,18 +46,33 @@ const injectKV = async (event) => {
     }
 
   } catch (error) {
-    console.log("🚀 ~ file: hooks.server.ts:12 ~ consthandle:Handle= ~ error:", error)
+    console.log("🚀 ~ file: hooks.server.ts:50 ~ consthandle:Handle= ~ error:", error)
 
   }
 
 
 }
 
+const injectDbPg = async (event) => {
+
+  try {
+
+    event.locals.DB_PG = ConnectSupabasePg()
+
+  } catch (error) {
+    console.log("🚀 ~ file: hooks.server.ts:64 ~ consthandle:Handle= ~ error:", error)
+
+  }
+}
+
+
+
 export const handle: Handle = async ({ event, resolve }) => {
 
   if (event.url.pathname.startsWith('/api')) {
-    await injectDB(event);
+    await injectD1(event);
     await injectKV(event);
+    await injectDbPg(event);
   }
 
   if (event.url.pathname.startsWith('/api') && event.request.method === 'OPTIONS') {

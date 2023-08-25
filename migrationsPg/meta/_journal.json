@@ -1,0 +1,34 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1692926573868,
+      "tag": "0000_boring_grim_reaper",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1692929213004,
+      "tag": "0001_yummy_speed_demon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1692929447012,
+      "tag": "0002_dark_domino",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1692929635836,
+      "tag": "0003_fat_chat",
+      "breakpoints": true
+    }
+  ]
+}

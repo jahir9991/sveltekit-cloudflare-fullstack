@@ -1,8 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { KVCrudService, type User } from '../../../../libs/kv/kvService.js';
-
-
-
+import { KVCrudService, type UserKv } from '../../../../libs/kv/kvService.js';
 
 export async function GET({ params, locals }) {
     try {
@@ -10,7 +7,7 @@ export async function GET({ params, locals }) {
         const kv = locals.KV;
 
 
-        const usersService = new KVCrudService<User>({
+        const usersService = new KVCrudService<UserKv>({
             kv,
             objectPrefix: 'users',
         })
@@ -37,7 +34,7 @@ export async function PUT({ request, params, locals }) {
         if (!locals.KV) throw new Error("no kv found");
         const kv = locals.KV;
 
-        const usersService = new KVCrudService<User>({
+        const usersService = new KVCrudService<UserKv>({
             kv,
             objectPrefix: 'users',
         })
@@ -68,7 +65,7 @@ export async function DELETE({  params, locals }) {
         if (!locals.KV) throw new Error("no kv found");
         const kv = locals.KV;
 
-        const usersService = new KVCrudService<User>({
+        const usersService = new KVCrudService<UserKv>({
             kv,
             objectPrefix: 'users',
         })

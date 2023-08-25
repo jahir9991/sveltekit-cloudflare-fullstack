@@ -5,7 +5,8 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			DB: DrizzleD1Database
-			KV: KVNamespace
+			KV: KVNamespace,
+			DB_PG: PostgresJsDatabase<schemaPg>
 		}
 		// interface PageData {}
 		interface Platform {

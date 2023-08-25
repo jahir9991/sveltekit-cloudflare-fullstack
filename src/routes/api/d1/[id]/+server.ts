@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm';
-import { User } from '../../../../schema.js';
+import { UserD1 } from '../../../../db/schemas/schemaD1';
 import { json } from '@sveltejs/kit';
 
 export async function GET({ params, locals }) {
@@ -10,8 +10,8 @@ export async function GET({ params, locals }) {
 
 
         const result = await DB
-            .select().from(User)
-            .where(eq(User.id, Number(params.id)))
+            .select().from(UserD1)
+            .where(eq(UserD1.id, Number(params.id)))
             .get();
 
         return json(result);
@@ -30,10 +30,10 @@ export const PUT = async ({ locals, request, params: { id } }) => {
         if (!locals.DB) throw new Error("no db found");
         const DB = locals.DB;
 
-        const newData: typeof User = await request.json();
-        const updatedData = await DB.update(User)
+        const newData: typeof UserD1 = await request.json();
+        const updatedData = await DB.update(UserD1)
             .set(newData as any)
-            .where(eq(User.id, Number(id)))
+            .where(eq(UserD1.id, Number(id)))
             .run();
 
         return json(updatedData);
@@ -53,8 +53,8 @@ export const DELETE = async ({ locals, request, params: { id } }) => {
         const DB = locals.DB;
 
 
-        const deletedData = await DB.delete(User)
-            .where(eq(User.id, Number(id)))
+        const deletedData = await DB.delete(UserD1)
+            .where(eq(UserD1.id, Number(id)))
             .run();
 
         return json(deletedData)

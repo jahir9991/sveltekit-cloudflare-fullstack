@@ -1,4 +1,4 @@
-export interface User {
+export interface UserKv {
     // Objects going into the CRUD service must have an ID
     id: string
     name: string
