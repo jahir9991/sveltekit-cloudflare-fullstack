@@ -28,7 +28,6 @@
 		"@fontsource/fira-mono": "^5.0.8",
 		"@neoconfetti/svelte": "^1.0.0",
 		"@playwright/test": "^1.37.1",
-		"@sveltejs/adapter-auto": "^2.1.0",
 		"@sveltejs/adapter-cloudflare": "^2.3.2",
 		"@sveltejs/adapter-cloudflare-node": "https://github.com/wackfx/adapter-cloudflare-node",
 		"@sveltejs/kit": "^1.22.6",
