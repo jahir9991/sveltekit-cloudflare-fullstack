@@ -15,6 +15,11 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
+"@chientrm/postgres@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@chientrm/postgres/-/postgres-3.4.0.tgz#1abd6b0248cb5821fbbc4300e00ec0d60df66278"
+  integrity sha512-UJKy2mG8N+a6LWmYIM0xGekrjeXXNvB9wRhz7E4Iz1GR89d5GRRIerFtBYagQlCT3qO6tks0aL0Cr67WBsQFVw==
+
 "@cloudflare/kv-asset-handler@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@cloudflare/kv-asset-handler/-/kv-asset-handler-0.2.0.tgz#c9959bbd7a1c40bd7c674adae98aa8c8d0e5ca68"
@@ -2283,10 +2288,6 @@ postcss@^8.4.27, postcss@^8.4.28, postcss@^8.4.5:
     nanoid "^3.3.6"
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
-
-"postgres@https://github.com/porsager/postgres":
-  version "3.3.5"
-  resolved "https://github.com/porsager/postgres#ae2be52acfb813a191afc3eec711c8482cbeada6"
 
 prebuild-install@^7.1.0:
   version "7.1.1"
