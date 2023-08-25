@@ -6,4 +6,15 @@ export default defineConfig({
 	// resolve: {
 	// 	conditions: ['workerd', 'webworker', 'worker', 'browser', 'import', 'module', 'default']
 	// },
+	// build: {
+	// 	rollupOptions: {
+	// 		external: [
+	// 			'cloudflare:socket',
+	// 			'node:events',
+	// 			'node:stream',
+	// 			'node:buffer',
+	// 		]
+	// 	}
+	// }
+
 });
