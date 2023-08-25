@@ -562,6 +562,13 @@
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
   integrity sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==
 
+"@sveltejs/adapter-auto@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@sveltejs/adapter-auto/-/adapter-auto-2.1.0.tgz#cb36fd7081e3c4b1c9a9192b1a23c8c82dce8a1b"
+  integrity sha512-o2pZCfATFtA/Gw/BB0Xm7k4EYaekXxaPGER3xGSY3FvzFJGTlJlZjBseaXwYSM94lZ0HniOjTokN3cWaLX6fow==
+  dependencies:
+    import-meta-resolve "^3.0.0"
+
 "@sveltejs/adapter-cloudflare-node@https://github.com/wackfx/adapter-cloudflare-node":
   version "2.3.3"
   resolved "https://github.com/wackfx/adapter-cloudflare-node#8b9327b34cf400a43925c3f2dc2cd5baf4942fd6"
@@ -883,7 +890,7 @@ base64-js@^1.3.1:
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
-better-sqlite3@^8.1.0, better-sqlite3@^8.5.2:
+better-sqlite3@^8.1.0:
   version "8.5.2"
   resolved "https://registry.yarnpkg.com/better-sqlite3/-/better-sqlite3-8.5.2.tgz#a1c13e4361125255e39302e8b569a6568c3291e3"
   integrity sha512-w/EZ/jwuZF+/47mAVC2+rhR2X/gwkZ+fd1pbX7Y90D5NRaRzDQcxrHY10t6ijGiYIonCVsBSF5v1cay07bP5sg==
@@ -1772,6 +1779,11 @@ import-fresh@^3.2.1:
   dependencies:
     parent-module "^1.0.0"
     resolve-from "^4.0.0"
+
+import-meta-resolve@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/import-meta-resolve/-/import-meta-resolve-3.0.0.tgz#94a6aabc623874fbc2f3525ec1300db71c6cbc11"
+  integrity sha512-4IwhLhNNA8yy445rPjD/lWh++7hMDOml2eHtd58eG7h+qK3EryMuuRbsHGPikCoAgIkkDnckKfWSk2iDla/ejg==
 
 imurmurhash@^0.1.4:
   version "0.1.4"
@@ -2954,10 +2966,10 @@ wrangler-proxy@^2.1.3:
   resolved "https://registry.yarnpkg.com/wrangler-proxy/-/wrangler-proxy-2.1.3.tgz#a9c116057fa61607de28b7e0b043a5861788ae7e"
   integrity sha512-MmjL7Rx/5koNN9tfSROnKyfEanQf+m17EtrQen7P+uoLA2uTRnAZE78PPsgWQk19Gb//d3gAf/0zXneQp5MyJQ==
 
-wrangler@3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/wrangler/-/wrangler-3.5.1.tgz#e7835f964e061b86695c1b6f6fa799e8281e77f8"
-  integrity sha512-CnrKId+pmjTfLSidM9Ut7lUDCFWEtJyY3JT3Dk+TgYHvu2zVmMgUeQQZHZfvpVN5eaEZifNQr90KEvMLy7MhHw==
+wrangler@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/wrangler/-/wrangler-3.6.0.tgz#025aac31cf3cc2fa191f7087d64d9a84280d4932"
+  integrity sha512-GWs4+gIUK+086svW/TgFhhxxrl/hdW2L7WASbdc10dJT7yFmCXse0SnHiqWUxbFu3ScP2t3a3LszJ08wwolWHg==
   dependencies:
     "@cloudflare/kv-asset-handler" "^0.2.0"
     "@esbuild-plugins/node-globals-polyfill" "^0.1.1"

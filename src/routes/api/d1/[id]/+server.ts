@@ -34,9 +34,9 @@ export const PUT = async ({ locals, request, params: { id } }) => {
         const updatedData = await DB.update(UserD1)
             .set(newData as any)
             .where(eq(UserD1.id, Number(id)))
-            .run();
+            .returning().get();
 
-        return json(updatedData);
+        return json({ payload: updatedData });
 
     } catch (error: any) {
         console.log("err", error);
@@ -55,9 +55,11 @@ export const DELETE = async ({ locals, request, params: { id } }) => {
 
         const deletedData = await DB.delete(UserD1)
             .where(eq(UserD1.id, Number(id)))
-            .run();
+            .returning();
 
-        return json(deletedData)
+        return json({
+            payload: deletedData[0]??{}
+        })
 
     } catch (error: any) {
         console.log("err", error);
