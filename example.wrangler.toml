@@ -5,8 +5,8 @@ node_compat = true
 [[d1_databases]]
 binding = "DB"
 database_name = "cloudflare_fullstack_db"
-database_id = "dc466e78-7d84-bd-9731-04052d5b615b" #set the database id here
-preview_database_id = "cdc466e78-7d84-bd-9731-04052d5b615b"    # this is the local db 
+database_id = "bd-9731-04052d5b615b" #set the database id here
+preview_database_id = "7d84-bd-9731-04052d5b615b"    # this is the local db 
 migrations_dir ='migrationsD1'
 
 

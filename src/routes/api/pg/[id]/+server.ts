@@ -36,9 +36,11 @@ export const PUT = async ({ locals, request, params: { id } }) => {
         const updatedData = await DB.update(PostPg)
             .set(newData as any)
             .where(eq(PostPg.id, Number(id)))
-            .run();
+            .returning();
 
-        return json(updatedData);
+        return json({
+            payload:updatedData[0]??{}
+        });
 
     } catch (error: any) {
         console.log("err", error);
