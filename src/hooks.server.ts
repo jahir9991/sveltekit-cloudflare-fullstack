@@ -6,6 +6,7 @@ import { ConnectSupabasePg } from "./db/connectSupabasePg";
 import { ConnectNeonPgServerless } from "./db/connectNeonPgServerless";
 import { ConnectNeonPgNode } from "./db/connectneonPgNode";
 import { dev } from "$app/environment";
+import { ConnectCockroachPg } from "./db/connectCockroachPg";
 
 const hostname = SERVER_ENV.PROXY_HOST;
 
@@ -61,6 +62,15 @@ const injectDbSupabase = async (event) => {
     console.log("🚀 ~ file: hooks.server.ts:64 ~ consthandle:Handle= ~ error:", error)
   }
 }
+const injectDbCockroach = async (event) => {
+
+  try {
+    event.locals.DB_COCKROACH_PG = ConnectCockroachPg()
+
+  } catch (error) {
+    console.log("🚀 ~ file: hooks.server.ts:71 ~ consthandle:Handle= ~ error:", error)
+  }
+}
 
 const injectDbNeon = async (event) => {
 
@@ -81,19 +91,27 @@ export const handle: Handle = async ({ event, resolve }) => {
   if (event.url.pathname.startsWith('/api/kv')) {
 
     await injectKV(event);
-
-  } else if (event.url.pathname.startsWith('/api/pg')) {
-
-    await injectDbSupabase(event);
-  } else if (event.url.pathname.startsWith('/api/supabase')) {
-
-    await injectDbSupabase(event);
-  } else if (event.url.pathname.startsWith('/api/neon')) {
-
-    await injectDbNeon(event);
   } else if (event.url.pathname.startsWith('/api/d1')) {
     await injectD1(event);
   }
+
+  else if (event.url.pathname.startsWith('/api/pg')) {
+
+    await injectDbSupabase(event);
+  }
+  else if (event.url.pathname.startsWith('/api/supabase')) {
+
+    await injectDbSupabase(event);
+  }
+  else if (event.url.pathname.startsWith('/api/neon')) {
+
+    await injectDbNeon(event);
+  }
+  else if (event.url.pathname.startsWith('/api/cockroach')) {
+
+    await injectDbCockroach(event);
+  }
+
 
 
 

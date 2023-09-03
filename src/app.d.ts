@@ -7,7 +7,8 @@ declare global {
 			DB: DrizzleD1Database
 			KV: KVNamespace,
 			DB_SUPABASE_PG: PostgresJsDatabase<schemaSupabase>
-			DB_NEON_PG: any
+			DB_NEON_PG: any,
+			DB_COCKROACH_PG: any,
 		}
 		// interface PageData {}
 		interface Platform {
