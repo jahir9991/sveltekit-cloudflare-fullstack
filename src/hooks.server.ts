@@ -66,7 +66,7 @@ const injectDbNeon = async (event) => {
 
   try {
 
-    event.locals.DB_NEON_PG = dev ? ConnectNeonPgNode() : ConnectNeonPgServerless
+    event.locals.DB_NEON_PG = dev ? ConnectNeonPgNode() : ConnectNeonPgServerless()
     console.log("🚀 ~ file: hooks.server.ts:70 ~ injectDbNeon ~ dev:", dev)
 
   } catch (error) {
