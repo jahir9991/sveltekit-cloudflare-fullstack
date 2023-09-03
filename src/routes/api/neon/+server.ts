@@ -1,12 +1,12 @@
 import { json } from "@sveltejs/kit";
 
 import { like, sql } from "drizzle-orm";
-import { PostPg } from "../../../db/schemas/schemaSupabase/post.schema.js";
+import { ArticlePg } from "../../../db/schemas/schemaNeon/article.schema.js";
 
 export async function GET({ url, locals }) {
     try {
-        if (!locals.DB_SUPABASE_PG) throw new Error("no DB_PG found");
-        const DB = locals.DB_SUPABASE_PG;
+        if (!locals.DB_NEON_PG) throw new Error("no DB_NEON_PG found");
+        const DB = locals.DB_NEON_PG;
 
         const searchTerm = url.searchParams.get('q') ?? "";
         const limit: number = Number(url.searchParams.get('limit') ?? 10);
@@ -19,8 +19,8 @@ export async function GET({ url, locals }) {
         await DB.transaction(async (tx) => {
             result = await tx
                 .select(
-            ).from(PostPg)
-                .where(like(PostPg.title, `%${searchTerm}%`))
+            ).from(ArticlePg)
+                .where(like(ArticlePg.title, `%${searchTerm}%`))
                 .limit(limit)
                 .offset((page - 1) * limit);
 
@@ -28,8 +28,8 @@ export async function GET({ url, locals }) {
             [{ count }] = await tx
                 .select(
                     { count: sql<number>`count(*)::int` }
-                ).from(PostPg)
-                .where(like(PostPg.title, `%${searchTerm}%`))
+                ).from(ArticlePg)
+                .where(like(ArticlePg.title, `%${searchTerm}%`))
         });
 
         return json(
@@ -52,16 +52,17 @@ export async function GET({ url, locals }) {
 
 export async function POST({ request, locals }) {
     try {
-        if (!locals.DB_SUPABASE_PG) throw new Error("no DB_PG found");
-        const DB = locals.DB_SUPABASE_PG;
+        if (!locals.DB_NEON_PG) throw new Error("no DB_NEON_PG found");
+        const DB = locals.DB_NEON_PG;
+        console.log("🚀 ~ file: +server.ts:57 ~ POST ~ DB:", DB)
 
-        const post: typeof PostPg = await request.json();
+        const post: typeof ArticlePg = await request.json();
         // const result = await DB.insert(PostPg).values(post)
         //     .returning();
 
         let result;
         await DB.transaction(async (tx) => {
-            result = await tx.insert(PostPg).values(post)
+            result = await tx.insert(ArticlePg).values(post)
                 .returning();
         });
 

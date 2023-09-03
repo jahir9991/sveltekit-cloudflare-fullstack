@@ -6,7 +6,8 @@ declare global {
 		interface Locals {
 			DB: DrizzleD1Database
 			KV: KVNamespace,
-			DB_PG: PostgresJsDatabase<schemaPg>
+			DB_SUPABASE_PG: PostgresJsDatabase<schemaSupabase>
+			DB_NEON_PG: any
 		}
 		// interface PageData {}
 		interface Platform {

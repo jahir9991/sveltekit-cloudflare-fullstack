@@ -1,4 +1,4 @@
-import { eq, sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { json } from '@sveltejs/kit';
 import { PostPg } from '../../../../db/schemas/schemaSupabase/post.schema.js';
 

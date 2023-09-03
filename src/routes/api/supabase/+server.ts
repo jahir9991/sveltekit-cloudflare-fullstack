@@ -1,5 +1,4 @@
 import { json } from "@sveltejs/kit";
-
 import { like, sql } from "drizzle-orm";
 import { PostPg } from "../../../db/schemas/schemaSupabase/post.schema.js";
 

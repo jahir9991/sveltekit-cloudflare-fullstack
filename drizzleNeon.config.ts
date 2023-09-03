@@ -4,13 +4,14 @@ import { config } from 'dotenv';
 config();
 
 export default {
-    schema: "src/db/schemas/schemaPg/*",
-    out: "migrationsPg",
+    schema: "src/db/schemas/schemaNeon/*",
+    out: "migrationsNeon",
     driver: 'pg',
     breakpoints: true,
 
     dbCredentials: {
-        connectionString: process.env.SUPABASE_PG_URL
+        // ssl:true,
+        connectionString: String(process.env.NEON_PG_URL)
     },
 
 } satisfies Config;

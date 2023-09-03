@@ -2,7 +2,8 @@ import type { Handle } from "@sveltejs/kit";
 import { drizzle } from "drizzle-orm/d1";
 import { SERVER_ENV } from "./SERVER_ENV";
 import { createBridge } from "cfw-bindings-wrangler-bridge";
-import { ConnectSupabasePg } from "./db/connectPg";
+import { ConnectSupabasePg } from "./db/connectSupabasePg";
+import { ConnectNeonPg } from "./db/connectNeonPg";
 
 const hostname = SERVER_ENV.PROXY_HOST;
 
@@ -49,13 +50,23 @@ const injectKV = async (event) => {
 
 }
 
-const injectDbPg = async (event) => {
+const injectDbSupabase = async (event) => {
 
   try {
-    event.locals.DB_PG = ConnectSupabasePg()
+    event.locals.DB_SUPABASE_PG = ConnectSupabasePg()
 
   } catch (error) {
     console.log("🚀 ~ file: hooks.server.ts:64 ~ consthandle:Handle= ~ error:", error)
+  }
+}
+
+const injectDbNeon = async (event) => {
+
+  try {
+    event.locals.DB_NEON_PG = await ConnectNeonPg()
+
+  } catch (error) {
+    console.log("🚀 ~ file: hooks.server.ts:69 ~ consthandle:Handle= ~ error:", error)
   }
 }
 
@@ -69,7 +80,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   } else if (event.url.pathname.startsWith('/api/pg')) {
 
-    await injectDbPg(event);
+    await injectDbSupabase(event);
+  } else if (event.url.pathname.startsWith('/api/supabase')) {
+
+    await injectDbSupabase(event);
+  } else if (event.url.pathname.startsWith('/api/neon')) {
+
+    await injectDbNeon(event);
   } else if (event.url.pathname.startsWith('/api/d1')) {
     await injectD1(event);
   }

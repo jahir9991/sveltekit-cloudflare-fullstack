@@ -1,17 +1,17 @@
-import { eq, sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { json } from '@sveltejs/kit';
-import { PostPg } from '../../../../db/schemas/schemaSupabase/post.schema.js';
+import { ArticlePg } from '../../../../db/schemas/schemaNeon/article.schema.js';
 
 export async function GET({ params, locals }) {
     try {
 
-        if (!locals.DB_SUPABASE_PG) throw new Error("no DB_PG found");
-        const DB = locals.DB_SUPABASE_PG;
+        if (!locals.DB_NEON_PG) throw new Error("no DB_NEON_PG found");
+        const DB = locals.DB_NEON_PG;
 
 
         const result = await DB
-            .select().from(PostPg)
-            .where(eq(PostPg.id, Number(params.id)))
+            .select().from(ArticlePg)
+            .where(eq(ArticlePg.id, Number(params.id)))
 
 
         return json({
@@ -29,17 +29,17 @@ export async function GET({ params, locals }) {
 
 export const PUT = async ({ locals, request, params: { id } }) => {
     try {
-        if (!locals.DB_SUPABASE_PG) throw new Error("no DB_PG found");
-        const DB = locals.DB_SUPABASE_PG;
+        if (!locals.DB_NEON_PG) throw new Error("no DB_NEON_PG found");
+        const DB = locals.DB_NEON_PG;
 
-        const newData: typeof PostPg = await request.json();
-        const updatedData = await DB.update(PostPg)
+        const newData: typeof ArticlePg = await request.json();
+        const updatedData = await DB.update(ArticlePg)
             .set(newData as any)
-            .where(eq(PostPg.id, Number(id)))
+            .where(eq(ArticlePg.id, Number(id)))
             .returning();
 
         return json({
-            payload:updatedData[0]??{}
+            payload: updatedData[0] ?? {}
         });
 
     } catch (error: any) {
@@ -52,13 +52,13 @@ export const PUT = async ({ locals, request, params: { id } }) => {
 
 export const DELETE = async ({ locals, params: { id } }) => {
     try {
-        if (!locals.DB_SUPABASE_PG) throw new Error("no DB_PG found");
-        const DB = locals.DB_SUPABASE_PG;
+        if (!locals.DB_NEON_PG) throw new Error("no DB_NEON_PG found");
+        const DB = locals.DB_NEON_PG;
 
         let result;
         await DB.transaction(async (tx) => {
-            result = await tx.delete(PostPg)
-                .where(eq(PostPg.id, Number(id)))
+            result = await tx.delete(ArticlePg)
+                .where(eq(ArticlePg.id, Number(id)))
                 .returning();
         });
 
