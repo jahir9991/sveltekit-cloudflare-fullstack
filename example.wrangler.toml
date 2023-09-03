@@ -1,6 +1,8 @@
 name = "cloudflare-fullstack"
 compatibility_date = "2023-08-14"
 node_compat = true
+nodejs_compat = true
+compatibility_flags = ["nodejs_compat"]
 
 [[d1_databases]]
 binding = "DB"

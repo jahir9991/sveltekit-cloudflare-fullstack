@@ -5,7 +5,7 @@
 	"scripts": {
 		"start": "vite dev",
 		"proxy": "wrangler dev node_modules/cfw-bindings-wrangler-bridge/worker.js --remote",
-		"build": "vite build",
+				"build": "vite build",
 		"build:w": "vite build --watch",
 		"neon:local": "drizzle-kit generate:pg --config=drizzleNeon.config.ts",
 		"neon:prod": "drizzle-kit push:pg --config=drizzleNeon.config.ts",

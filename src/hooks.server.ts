@@ -3,7 +3,9 @@ import { drizzle } from "drizzle-orm/d1";
 import { SERVER_ENV } from "./SERVER_ENV";
 import { createBridge } from "cfw-bindings-wrangler-bridge";
 import { ConnectSupabasePg } from "./db/connectSupabasePg";
-import { ConnectNeonPg } from "./db/connectNeonPg";
+import { ConnectNeonPgServerless } from "./db/connectNeonPgServerless";
+import { ConnectNeonPgNode } from "./db/connectneonPgNode";
+import { dev } from "$app/environment";
 
 const hostname = SERVER_ENV.PROXY_HOST;
 
@@ -63,7 +65,9 @@ const injectDbSupabase = async (event) => {
 const injectDbNeon = async (event) => {
 
   try {
-    event.locals.DB_NEON_PG = await ConnectNeonPg()
+
+    event.locals.DB_NEON_PG = dev ? ConnectNeonPgNode() : ConnectNeonPgServerless
+    console.log("🚀 ~ file: hooks.server.ts:70 ~ injectDbNeon ~ dev:", dev)
 
   } catch (error) {
     console.log("🚀 ~ file: hooks.server.ts:69 ~ consthandle:Handle= ~ error:", error)
