@@ -10,7 +10,7 @@ export default {
     breakpoints: true,
 
     dbCredentials: {
-        connectionString: String(process.env.COCKROACH_PG_URL)
+        connectionString: String(process.env.SUPABASE_PG_URL)
     },
 
 } satisfies Config;
