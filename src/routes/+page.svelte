@@ -1,3 +1,7 @@
+<script>
+	import Readme from '../README.md';
+</script>
+
 <svelte:head>
 	<title>Home</title>
 	<meta name="description" content="Svelte demo app" />
@@ -10,16 +14,8 @@
 
 		to <br /> SvelteKit Cloudflate full stack app
 	</h1>
-
-	<h2>
-		<a href="/doc" target="_blank">Documentation</a>
-	</h2>
-	<h2>
-		<a href="https://github.com/jahir9991/cloudflare-fullstack" target="_blank"
-			>find the code in github</a
-		>
-	</h2>
 </section>
+<Readme />
 
 <style>
 	section {
