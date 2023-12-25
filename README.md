@@ -26,8 +26,7 @@ DOCUMENTATION COMING SOON !!!!
 # need to add this adapter as pages node_compatibility dosen't working as expected
 "@sveltejs/adapter-cloudflare-node": "https://github.com/wackfx/adapter-cloudflare-node",		
 
-#need to add this package for postgres 
-"@chientrm/postgres": "^3.4.0",
+
 
 #need to add Compatibility flags in cf dashboard
 Compatibility flags: nodejs_compat
@@ -41,7 +40,7 @@ Compatibility flags: nodejs_compat
 
 name = "cloudflare-fullstack"
 compatibility_date = "2023-08-14"
-node_compat = true
+# node_compat = true
 
 [[d1_databases]]
 binding = "DB"
