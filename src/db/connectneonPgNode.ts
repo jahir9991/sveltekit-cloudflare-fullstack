@@ -1,4 +1,4 @@
-import postgres from '@chientrm/postgres';
+import postgres from 'postgres';
 import { drizzle } from 'drizzle-orm/postgres-js';
 
 import { SERVER_ENV } from '../SERVER_ENV';
