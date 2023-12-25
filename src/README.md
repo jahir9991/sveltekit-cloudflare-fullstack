@@ -39,20 +39,29 @@ Compatibility flags: nodejs_compat
 
 name = "cloudflare-fullstack"
 compatibility_date = "2023-08-14"
-# node_compat = true
-
-[[d1_databases]]
-binding = "DB"
-database_name = "cloudflare_fullstack_db"
-database_id = "bd-9731-04052d5b615b" #set the database id here
-preview_database_id = "7d84-bd-9731-04052d5b615b"    # this is the local db
-migrations_dir ='migrationsD1'
+compatibility_flags = ["nodejs_compat"]
 
 
-[[kv_namespaces]]
-binding = "KV"
-id = "ac5ef8073e3a4sdsdssdsdsdsds"       # remote id
-preview_id = "ac5ef8073es3a4esdsdsdsdsd" # local id
+
+
+# for local dev....
+vars = { ENVIRONMENT = "dev" ,BASE_URL = "dev.example.com"}
+d1_databases =[{ binding = "DB" ,database_name = "cloudflare_fullstack_db" , database_id = "{id from cloudflare}"  , migrations_dir = "migrationsD1" }]
+kv_namespaces =[{ binding = "KV" , id = "{id from cloudflare}"  , preview_id = "{id from cloudflare}" }]
+
+
+[env.staging]
+vars = { ENVIRONMENT = "staging" ,BASE_URL = "staging.example.com"}
+d1_databases =[{ binding = "DB" ,database_name = "cloudflare_fullstack_db" , database_id = "{id from cloudflare}"  , migrations_dir = "migrationsD1" }]
+kv_namespaces =[{ binding = "KV" , id = "{id from cloudflare}"  , preview_id = "{id from cloudflare}" }]
+
+
+[env.production]
+vars = { ENVIRONMENT = "production" ,BASE_URL = "example.com"}
+d1_databases =[{ binding = "DB" ,database_name = "cloudflare_fullstack_db" , database_id = "{id from cloudflare}" , migrations_dir = "migrationsD1" }]
+kv_namespaces =[{ binding = "KV" , id = "{id from cloudflare}"  , preview_id = "{id from cloudflare}" }]
+
+
 
 
 ```
@@ -65,7 +74,7 @@ Start a proxy server if you want to access your remote Cloudflare resources:
 
 ```bash
 npm run proxy
-# "proxy": "wrangler dev node_modules/cfw-bindings-wrangler-bridge/worker.js --remote"
+# "proxy": "wrangler dev node_modules/cfw-bindings-wrangler-bridge/worker/index.js --remote --env staging --ip 127.0.0.1 --port 8787",
 
 
 # or start the sveltekit server and open the app in a new browser tab

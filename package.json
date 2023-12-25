@@ -4,7 +4,7 @@
 	"license": "Apache-2.0",
 	"scripts": {
 		"start": "vite dev",
-		"proxy": "wrangler dev node_modules/cfw-bindings-wrangler-bridge/worker/index.js --remote",
+		"proxy": "wrangler dev node_modules/cfw-bindings-wrangler-bridge/worker/index.js --remote --env staging --ip 127.0.0.1 --port 8787",
 		"build": "vite build",
 		"build:prod": "npm run  db:prod:push:all && vite build",
 		"db:prod:push:all": "npm run supabase:prod && npm run neon:prod  ",
