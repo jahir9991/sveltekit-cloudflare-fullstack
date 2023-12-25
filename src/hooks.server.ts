@@ -2,10 +2,9 @@ import type { Handle } from '@sveltejs/kit';
 import { drizzle } from 'drizzle-orm/d1';
 import { ConnectSupabasePg } from './db/connectSupabasePg';
 import { ConnectNeonPgServerless } from './db/connectNeonPgServerless';
-import { ConnectNeonPgNode } from './db/connectneonPgNode';
-import { ConnectCockroachPg } from './db/connectCockroachPg';
 import { dev } from '$app/environment';
 import { getDevD1, getDevKV } from './config/mockDev';
+import { ConnectNeonPgNode } from './db/connectneonPgNode';
 
 const injectD1 = async (event) => {
 	try {
@@ -38,13 +37,6 @@ const injectDbSupabase = async (event) => {
 		console.log('🚀 ~ file: hooks.server.ts:64 ~ consthandle:Handle= ~ error:', error);
 	}
 };
-const injectDbCockroach = async (event) => {
-	try {
-		event.locals.DB_COCKROACH_PG = ConnectCockroachPg();
-	} catch (error) {
-		console.log('🚀 ~ file: hooks.server.ts:71 ~ consthandle:Handle= ~ error:', error);
-	}
-};
 
 const injectDbNeon = async (event) => {
 	try {
@@ -64,8 +56,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 		await injectDbSupabase(event);
 	} else if (event.url.pathname.startsWith('/api/neon')) {
 		await injectDbNeon(event);
-	} else if (event.url.pathname.startsWith('/api/cockroach')) {
-		await injectDbCockroach(event);
 	}
 
 	if (event.url.pathname.startsWith('/api') && event.request.method === 'OPTIONS') {

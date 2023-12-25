@@ -61,12 +61,6 @@ preview_id = "ac5ef8073es3a4esdsdsdsdsd" # local id
 
 install dependencies with `npm install` (or `pnpm install` or `yarn`),
 
-Start a proxy server if you want to access your remote Cloudflare resources:
-
-```bash
-npm run proxy
-# "proxy": "wrangler dev node_modules/cfw-bindings-wrangler-bridge/worker.js --remote"
-
 
 # or start the sveltekit server and open the app in a new browser tab
 npm run start -- --open
