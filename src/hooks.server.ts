@@ -3,16 +3,16 @@ import { drizzle } from 'drizzle-orm/d1';
 import { ConnectSupabasePg } from './db/connectSupabasePg';
 import { ConnectNeonPgServerless } from './db/connectNeonPgServerless';
 import { ConnectNeonPgNode } from './db/connectneonPgNode';
-import { dev } from '$app/environment';
 import { ConnectCockroachPg } from './db/connectCockroachPg';
+import { dev } from '$app/environment';
 import { getDevD1, getDevKV } from './config/mockDev';
 
 const injectD1 = async (event) => {
 	try {
 		if (event.platform?.env?.DB) {
 			event.locals.DB = drizzle(event.platform?.env?.DB);
-		} else {
-			event.locals.DB = drizzle(getDevD1('DB'));
+		} else if (dev) {
+			event.locals.DB = drizzle(await getDevD1('DB'));
 		}
 	} catch (error) {
 		console.log('🚀 ~ file: hooks.server.ts:27 ~ consthandle:Handle= ~ error:', error);
@@ -23,8 +23,8 @@ const injectKV = async (event) => {
 	try {
 		if (event.platform?.env?.KV) {
 			event.locals.KV = event.platform?.env?.KV;
-		} else {
-			event.locals.KV = getDevKV('KV');
+		} else if (dev) {
+			event.locals.KV = await getDevKV('KV');
 		}
 	} catch (error) {
 		console.log('🚀 ~ file: hooks.server.ts:50 ~ consthandle:Handle= ~ error:', error);
