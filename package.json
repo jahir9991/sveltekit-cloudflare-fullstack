@@ -29,7 +29,6 @@
 		"@chientrm/adapter-cloudflare": "^3.0.2",
 		"@sveltejs/adapter-cloudflare": "^3.0.1",
 		"@neondatabase/serverless": "^0.6.0",
-
 		"@fontsource/fira-mono": "^4.5.10",
 		"@neoconfetti/svelte": "^1.0.0",
 		"@playwright/test": "^1.37.1",
