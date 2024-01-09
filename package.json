@@ -35,8 +35,8 @@
 		"@neondatabase/serverless": "^0.6.0",
 		"@playwright/test": "^1.37.1",
 		"@sveltejs/adapter-cloudflare": "^3.0.1",
-		"@sveltejs/kit": "^2.0.6",
-		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@sveltejs/kit": "^2.1.2",
+		"@sveltejs/vite-plugin-svelte": "^3.0.1",
 		"@types/bcryptjs": "^2.4.6",
 		"@types/cookie": "^0.5.1",
 		"@typescript-eslint/eslint-plugin": "^6.4.0",
@@ -64,7 +64,7 @@
 		"jwt-decode": "^3.1.2",
 		"mdsvex": "^0.11.0",
 		"nanoid": "^4.0.2",
-		"postcss": "^8.4.32",
+		"postcss": "^8.4.33",
 		"postcss-import": "^15.1.0",
 		"postcss-nested": "^6.0.1",
 		"postgres": "^3.4.3",
@@ -82,9 +82,9 @@
 		"tslib": "^2.6.2",
 		"tsyringe": "^4.8.0",
 		"typescript": "^5.3.3",
-		"vite": "^5.0.10",
+		"vite": "^5.0.11",
 		"vitest": "^1.0.0",
-		"wrangler": "^3.22.3"
+		"wrangler": "^3.22.4"
 	},
 	"type": "module"
 }

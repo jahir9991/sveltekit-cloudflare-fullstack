@@ -4,8 +4,8 @@ import { injectKV } from './db/connectionKV';
 
 import { injectD1 } from './db/D1.connect';
 import { GraphQLServer } from './graphQL/graphQL.server';
-import { injectDbSupabase } from './db/supabasePg.connect';
-import { injectDbNeon } from './db/neonPgServerless.connect';
+// import { injectDbSupabase } from './db/supabasePg.connect';
+// import { injectDbNeon } from './db/neonPgServerless.connect';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	if (event.url.pathname.startsWith('/graphql')) {
@@ -18,11 +18,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 	} else if (event.url.pathname.startsWith('/api/d1')) {
 		await injectD1(event);
 	}
-	 else if (event.url.pathname.startsWith('/api/supabase')) {
-		await injectDbSupabase(event);
-	} else if (event.url.pathname.startsWith('/api/neon')) {
-		await injectDbNeon(event);
-	}
+	//  else if (event.url.pathname.startsWith('/api/supabase')) {
+	// 	await injectDbSupabase(event);
+	// } else if (event.url.pathname.startsWith('/api/neon')) {
+	// 	await injectDbNeon(event);
+	// }
 
 	if (event.url.pathname.startsWith('/api') && event.request.method === 'OPTIONS') {
 		return new Response(null, {
