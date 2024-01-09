@@ -16,6 +16,7 @@
 		"d1:mig:local": "wrangler d1 migrations apply cloudflare_fullstack_db --local",
 		"d1:mig:prod": "wrangler d1 migrations apply cloudflare_fullstack_db ",
 		"preview": "vite preview",
+		"w": "wrangler pages dev ./.svelte-kit/cloudflare  --env staging  ",
 		"test": "npm run test:integration && npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -83,7 +84,7 @@
 		"typescript": "^5.3.3",
 		"vite": "^5.0.10",
 		"vitest": "^1.0.0",
-		"wrangler": "^3.22.1"
+		"wrangler": "^3.22.3"
 	},
 	"type": "module"
 }

@@ -1,8 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 
 import { injectKV } from './db/connectionKV';
-import { injectDbSupabase } from './db/supabasePg.connect';
-import { injectDbNeon } from './db/neonPgServerless.connect';
+
 import { injectD1 } from './db/D1.connect';
 import { GraphQLServer } from './graphQL/graphQL.server';
 
@@ -16,11 +15,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 		await injectKV(event);
 	} else if (event.url.pathname.startsWith('/api/d1')) {
 		await injectD1(event);
-	} else if (event.url.pathname.startsWith('/api/supabase')) {
-		await injectDbSupabase(event);
-	} else if (event.url.pathname.startsWith('/api/neon')) {
-		await injectDbNeon(event);
 	}
+	//  else if (event.url.pathname.startsWith('/api/supabase')) {
+	// 	await injectDbSupabase(event);
+	// } else if (event.url.pathname.startsWith('/api/neon')) {
+	// 	await injectDbNeon(event);
+	// }
 
 	if (event.url.pathname.startsWith('/api') && event.request.method === 'OPTIONS') {
 		return new Response(null, {

@@ -1,10 +1,10 @@
 import { Pool } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
+import { NeonDatabase, drizzle } from 'drizzle-orm/neon-serverless';
 import { SERVER_ENV } from '../SERVER_ENV';
 import { schemaNeon } from './schemas/schemaNeon';
 import { ConnectNeonPgNode } from './neonPgNode.connect';
 import { dev } from '$app/environment';
-export const ConnectNeonPgServerless = () => {
+export const ConnectNeonPgServerless = () :NeonDatabase<any> => {
 	const client = new Pool({ connectionString: SERVER_ENV.NEON_PG_URL });
 	return drizzle(client, { schema: schemaNeon });
 };
