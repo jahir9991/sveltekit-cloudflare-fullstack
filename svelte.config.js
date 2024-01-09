@@ -1,5 +1,5 @@
-// import adapter from '@sveltejs/adapter-cloudflare';
-import adapter from '@chientrm/adapter-cloudflare'; //this adepter can support for node
+import adapter from '@sveltejs/adapter-cloudflare';
+// import adapter from '@chientrm/adapter-cloudflare'; //this adepter can support for node
 
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
