@@ -1,8 +1,9 @@
 import { json } from '@sveltejs/kit';
-import { UserD1 } from '../../../db/schemas/schemaD1';
-import { UserService } from '../../../services/user.service';
+import { UserD1 } from '../../../../db/schemas/schemaD1';
+import { UserService } from '../../../../services/user.service';
+import { DI } from '$src/app/utils/DI';
 
-const modelService = new UserService();
+const modelService = DI.container.resolve(UserService);
 
 export async function GET({ url, locals }) {
 	try {

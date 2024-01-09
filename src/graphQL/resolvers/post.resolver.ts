@@ -1,8 +1,9 @@
+import { DI } from '$src/app/utils/DI';
 import { getGraphQlField } from '$src/app/utils/getGraphQlFeild.util';
 import { PostService } from '$src/services/post.service';
 import { GraphQLError, GraphQLResolveInfo } from 'graphql';
 
-const modelService = new PostService();
+const modelService = DI.container.resolve(PostService);
 
 const getAll = async (_, arg, context, info: GraphQLResolveInfo) => {
 	try {

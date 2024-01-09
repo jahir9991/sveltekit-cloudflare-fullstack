@@ -18,4 +18,4 @@ export const UserD1 = sqliteTable('users', {
 });
 
 export type UserD1Select = InferSelectModel<typeof UserD1>;
-export const insertUserSchema = createInsertSchema(UserD1);
+export const  insertUserSchema = createInsertSchema(UserD1);

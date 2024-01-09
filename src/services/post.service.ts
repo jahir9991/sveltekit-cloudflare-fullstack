@@ -4,9 +4,9 @@ import { MyHTTPException } from '$src/app/exceptions/MyHttpExceptions';
 import { getDbSelectkey } from '$src/app/utils/getSelectKey.util';
 import { SuccessResponse } from '$src/app/responses/success.response';
 import { PostD1 } from '$src/db/schemas/schemaD1';
-import { singleton } from 'tsyringe';
+import { DI } from '$src/app/utils/DI';
 
-@singleton()
+@DI.singleton()
 export class PostService {
 	constructor() {
 		console.log('PostService created..........');

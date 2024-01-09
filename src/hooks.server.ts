@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import type { Handle } from '@sveltejs/kit';
 
 import { injectKV } from './db/connectionKV';

@@ -4,6 +4,6 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
 	plugins: [sveltekit()],
 	ssr: {
-		external: ['reflect-metadata']
+		external: ['reflect-metadata','tsyringe']
 	}
 });

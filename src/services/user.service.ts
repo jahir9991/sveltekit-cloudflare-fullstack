@@ -5,9 +5,9 @@ import { getDbSelectkey } from '../app/utils/getSelectKey.util';
 import { MyHTTPException } from '../app/exceptions/MyHttpExceptions';
 import { SuccessResponse } from '../app/responses/success.response';
 import { BcryptHelper } from '../app/helpers/bcrypt.helper';
-import { singleton } from 'tsyringe';
+import { DI } from '$src/app/utils/DI';
 
-@singleton()
+@DI.singleton()
 export class UserService {
 	getAll = async (
 		DB: DrizzleD1Database,
@@ -132,11 +132,8 @@ export class UserService {
 		}
 	};
 
-	deleteOne = async (context) => {
+	deleteOne = async (DB: DrizzleD1Database, id: string) => {
 		try {
-			const DB = context.env.D1DB;
-			const id = context.req.param('id');
-
 			const deletedData = await DB.delete(UserD1).where(eq(UserD1.id, id)).returning();
 
 			return {

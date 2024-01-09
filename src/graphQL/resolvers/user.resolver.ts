@@ -1,8 +1,9 @@
+import { DI } from '$src/app/utils/DI';
 import { getGraphQlField } from '$src/app/utils/getGraphQlFeild.util';
 import { UserService } from '$src/services/user.service';
 import { GraphQLError, GraphQLResolveInfo } from 'graphql';
 
-const modelService = new UserService();
+const modelService = DI.container.resolve(UserService);
 
 const getAll = async (_, arg, context, info: GraphQLResolveInfo) => {
 	try {
