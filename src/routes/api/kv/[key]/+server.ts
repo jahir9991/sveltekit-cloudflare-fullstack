@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { KVCrudService, type UserKv } from '../../../../libs/kv/kvService.js';
+import { KVCrudService, type UserKv } from '../../../../services/kv/kvService.js';
 
 export async function GET({ params, locals }) {
     try {

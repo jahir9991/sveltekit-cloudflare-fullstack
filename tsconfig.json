@@ -3,12 +3,19 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"checkJs": true,
+		"incremental": true,
+		"declaration": true,
+		"removeComments": true,
+
 		"esModuleInterop": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": false
+		"strict": false,
+		"verbatimModuleSyntax": false
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
 	//

@@ -12,7 +12,10 @@ const config = {
 	preprocess: [mdsvex({ extensions: ['.svelte.md', '.md', '.svx'] }), vitePreprocess()],
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		alias: {
+			'$src/*': 'src/*'
+		}
 	}
 };
 
