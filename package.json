@@ -27,7 +27,6 @@
 		"test:unit": "vitest"
 	},
 	"devDependencies": {
-		"@chientrm/adapter-cloudflare": "^3.0.2",
 		"@envelop/graphql-jit": "^8.0.1",
 		"@fontsource/fira-mono": "^4.5.10",
 		"@graphql-yoga/plugin-response-cache": "^3.2.1",
@@ -35,7 +34,7 @@
 		"@neoconfetti/svelte": "^1.0.0",
 		"@neondatabase/serverless": "^0.6.0",
 		"@playwright/test": "^1.37.1",
-		"@sveltejs/adapter-cloudflare": "^3.0.1",
+		"@sveltejs/adapter-cloudflare": "^4.1.0",
 		"@sveltejs/kit": "^2.1.2",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
 		"@types/bcryptjs": "^2.4.6",
