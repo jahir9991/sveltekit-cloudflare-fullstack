@@ -27,7 +27,6 @@
 		"test:unit": "vitest"
 	},
 	"devDependencies": {
-		"@envelop/graphql-jit": "^8.0.1",
 		"@fontsource/fira-mono": "^4.5.10",
 		"@graphql-yoga/plugin-response-cache": "^3.2.1",
 		"@graphql-yoga/render-graphiql": "^5.1.1",

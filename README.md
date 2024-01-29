@@ -1,6 +1,6 @@
-# Git Repo
+# GraphQl :
 
-[`github`](https://github.com/jahir9991/cloudflare-fullstack).
+[`Live Demo :: https://cloudflare-fullstack.pages.dev/graphql`](https://cloudflare-fullstack.pages.dev/graphql).
 
 # Full API documentation
 
@@ -12,18 +12,51 @@
 
 ## cloudflare D1 + drizzle-orm
 
-[`get data from D1 ::https://cloudflare-fullstack.pages.dev/api/d1`](https://cloudflare-fullstack.pages.dev/api/d1).
+[`get data from D1 ::https://cloudflare-fullstack.pages.dev/api/d1/users`](https://cloudflare-fullstack.pages.dev/api/d1/users).
 
 ## cloudflare KV
 
 [`get data from KV ::https://cloudflare-fullstack.pages.dev/api/kv`](https://cloudflare-fullstack.pages.dev/api/kv).
 
+
+
+# graphql
+
+```js
+//hooks.server.ts
+if (event.url.pathname.startsWith('/graphql')) {
+	await injectD1(event);
+	return GraphQLServer(event);
+}
+
+//need to add Compatibility flags in cf dashboard
+
+//src/graphQL.server.ts
+export const GraphQLServer = (context) => {
+	return createYoga({
+		schema: makeExecutableSchema({
+			resolvers: [userResolver, postResolver],
+			typeDefs: [globalTypeDefination, userTypeDefinitions, postTypeDefination]
+		}),
+		context,
+		graphqlEndpoint: '/graphql',
+		landingPage: true,
+		multipart: true,
+		cors: true,
+		logging: 'error'
+	}).handle(context.request, context.response);
+};
+
+
+```
+
+
 # prerequesite
 
 ```bash
 
-# need to add this adapter as pages node_compatibility dosen't working as expected
-"@sveltejs/adapter-cloudflare-node": "https://github.com/wackfx/adapter-cloudflare-node",
+# need to add this proxy package for proxy cloudflare remote assets 
+"cfw-bindings-wrangler-bridge" 
 
 
 
@@ -31,6 +64,7 @@
 Compatibility flags: nodejs_compat
 
 ```
+
 
 # wrangler.toml
 
@@ -90,3 +124,10 @@ npm run build
 ```
 
 You can preview the production build with `npm run preview`.
+
+
+
+##  💪 Contributions
+We welcome contributions ! If you have an idea for a new feature or have found a bug,
+please open an issue in the repository. If you'd like to submit a fix or new feature,
+please create a pull request with a detailed description of your changes.
