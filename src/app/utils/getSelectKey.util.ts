@@ -1,12 +1,11 @@
-import { InferSelectModel } from 'drizzle-orm';
+import { type InferSelectModel } from 'drizzle-orm';
 
-export const getDbSelectkey = (dbSelectKeys:string[], model): InferSelectModel<typeof model> | null => {
-	let dd = null;
-	if (
-		dbSelectKeys !== null &&
-		dbSelectKeys !== undefined &&
-        dbSelectKeys.length > 0 
-	) {
+export const getDbSelectkey = (
+	dbSelectKeys: string[],
+	model
+): InferSelectModel<typeof model> | null => {
+	let dd ;
+	if (dbSelectKeys !== null && dbSelectKeys !== undefined && dbSelectKeys.length > 0) {
 		dd = {};
 		dbSelectKeys.forEach((key) => {
 			if (model[key]) {

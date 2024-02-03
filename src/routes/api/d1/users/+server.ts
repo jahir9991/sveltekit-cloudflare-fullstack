@@ -1,76 +1,60 @@
 import { json } from '@sveltejs/kit';
-import { UserD1 } from '../../../../db/schemas/schemaD1';
 import { UserService } from '../../../../services/user.service';
 import { DI } from '$src/app/utils/DI';
+import { KitError } from '$src/app/exceptions/KitError';
+
+import { ZodError, z } from 'zod';
+import { insertUserDto } from '$src/db/dtos/users.dto';
 
 const modelService = DI.container.resolve(UserService);
 
 export async function GET({ url, locals }) {
-	try {
-		const options = {
-			limit: Number(url.searchParams.get('limit') ?? 10),
-			page: Number(url.searchParams.get('page') ?? 1),
-			q: url.searchParams.get('q') ?? ''
-		};
-		const selectFields = JSON.parse(url.searchParams.get('fields') ?? '[]') ?? [];
-		const withMeta = url.searchParams.get('withmeta') === 'false' ? false : true;
+	const options = {
+		limit: Number(url.searchParams.get('limit') ?? 10),
+		page: Number(url.searchParams.get('page') ?? 1),
+		q: url.searchParams.get('q') ?? ''
+	};
+	const selectFields = JSON.parse(url.searchParams.get('fields') ?? '[]') ?? [];
+	const withMeta = url.searchParams.get('withmeta') === 'false' ? false : true;
 
-		const response = await modelService.getAll(locals.DB, options, selectFields, withMeta);
-		return json(response);
-	} catch (error) {
-		return error;
-	}
+	const response = await modelService.getAll(locals.DB, options, selectFields, withMeta);
+	return json(response);
 }
 
-// export async function GET({ url, locals }) {
-// 	try {
-// 		if (!locals.DB) throw new Error('no db found');
-// 		const DB = locals.DB;
-
-// 		const searchTerm = url.searchParams.get('q') ?? '';
-// 		const limit: number = Number(url.searchParams.get('limit') ?? 10);
-// 		const page: number = Number(url.searchParams.get('page') ?? 1);
-
-// 		const result = await DB.select()
-// 			.from(UserD1)
-// 			.where(like(UserD1.username, `%${searchTerm}%`))
-// 			.limit(limit)
-// 			.offset((page - 1) * limit);
-
-// 		const [{ count }] = await DB.select({ count: sql<number>`count(*)` })
-// 			.from(UserD1)
-// 			.where(like(UserD1.username, `%${searchTerm}%`));
-
-// 		return json({
-// 			meta: {
-// 				count,
-// 				page,
-// 				limit
-// 			},
-// 			payload: result
-// 		});
-// 	} catch (error) {
-// 		console.log(error);
-
-// 		return json({ error: error.message });
-// 	}
-// }
-
-export async function POST({ request, locals }) {
-	try {
-		if (!locals.DB) throw new Error('no db found');
-		const DB = locals.DB;
-
-		const { name, age }: { name: string; age: string } = await request.json();
-
-		const result = await DB.insert(UserD1).values({ name, age }).returning();
-
-		return json({
-			payload: result[0] ?? {}
+export async function POST({ request, locals, platform, url }) {
+	// try {
+	if (!locals.DB)
+		throw KitError(400, {
+			message: 'no db found'
 		});
-	} catch (error) {
-		console.log(error);
+	if (!locals.R2)
+		throw KitError(400, {
+			message: 'no R2 found...'
+		});
 
-		return json({ error: error.message });
-	}
+	const DB = locals.DB;
+	const R2 = locals.R2;
+
+	const formData: any = Object.fromEntries(await request.formData());
+	const selectFields = JSON.parse(url.searchParams.get('fields') ?? '[]') ?? [];
+
+	const payloadData = insertUserDto.parse(formData);
+
+	console.log('payloadData', payloadData);
+	const response = await modelService.createOne(DB, R2, payloadData, selectFields);
+
+	return json(response);
+	// } catch (err) {
+	// 	console.log('i am here', err);
+
+	// 	throw err;
+	// }
 }
+
+const isKitError = (value: any): value is KitError => {
+	return value instanceof KitError;
+};
+
+const isZodError = (value: any): value is ZodError => {
+	return value instanceof ZodError;
+};

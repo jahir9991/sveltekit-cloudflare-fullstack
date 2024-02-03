@@ -8,11 +8,17 @@ export const postTypeDefination = /* GraphQL */ `
 		id: String!
 		title: String!
 		description: String
-		isActive:Boolean
-		createdAt: String
+		authorId: String!
+		author: User!
+		isActive: Boolean!
+		createdAt: String!
+		createdBy: String
+		updatedAt: String
+		updatedBy: String
 		deletedAt: String
+		deletedBy: String
 	}
-	
+
 	type PostResponse {
 		success: Boolean
 		message: String

@@ -4,16 +4,17 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			DB: DrizzleD1Database
-			KV: KVNamespace,
-			DB_SUPABASE_PG: PostgresJsDatabase<schemaSupabase>
-			DB_NEON_PG: any,
+			DB: DrizzleD1Database;
+			R2: R2Bucket;
+			KV: KVNamespace;
+			DB_SUPABASE_PG: PostgresJsDatabase<schemaSupabase>;
+			DB_NEON_PG: any;
 		}
 		// interface PageData {}
 		interface Platform {
 			env?: {
 				DB: D1Database;
-				KV: KVNamespace
+				KV: KVNamespace;
 			};
 			context: {
 				waitUntil(promise: Promise<any>): void;
@@ -21,7 +22,6 @@ declare global {
 			caches: CacheStorage & { default: Cache };
 		}
 	}
-
 }
 
-export { };
+export {};

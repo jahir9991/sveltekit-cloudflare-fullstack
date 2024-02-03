@@ -1,8 +1,8 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle, HandleServerError } from '@sveltejs/kit';
 
 import { injectKV } from './db/connectionKV';
 
-import { injectD1 } from './db/D1.connect';
+import { injectD1, injectR2 } from './db/D1.connect';
 import { GraphQLServer } from './graphQL/graphQL.server';
 import { injectDbSupabase } from './db/supabasePg.connect';
 import { injectDbNeon } from './db/neonPgServerless.connect';
@@ -10,6 +10,8 @@ import { injectDbNeon } from './db/neonPgServerless.connect';
 export const handle: Handle = async ({ event, resolve }) => {
 	if (event.url.pathname.startsWith('/graphql')) {
 		await injectD1(event);
+		await injectR2(event);
+
 		return GraphQLServer(event);
 	}
 
@@ -17,8 +19,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		await injectKV(event);
 	} else if (event.url.pathname.startsWith('/api/d1')) {
 		await injectD1(event);
-	}
-	 else if (event.url.pathname.startsWith('/api/supabase')) {
+		await injectR2(event);
+	} else if (event.url.pathname.startsWith('/api/supabase')) {
 		await injectDbSupabase(event);
 	} else if (event.url.pathname.startsWith('/api/neon')) {
 		await injectDbNeon(event);
@@ -40,4 +42,18 @@ export const handle: Handle = async ({ event, resolve }) => {
 		response.headers.append('Access-Control-Allow-Origin', `*`);
 	}
 	return response;
+};
+
+export const handleError: HandleServerError = async ({ error, event, status, message }) => {
+	const errorId = crypto.randomUUID();
+
+	console.log('errorId???????', typeof error);
+
+	return {
+		message,
+		devMessage: error.message ?? 'something went wrong',
+		// statusCode: status,
+		errorId
+		// error
+	};
 };

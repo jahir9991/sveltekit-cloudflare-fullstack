@@ -4,4 +4,5 @@ export const globalTypeDefination = /* GraphQL */ `
 		page: Int
 		limit: Int
 	}
+	
 `;

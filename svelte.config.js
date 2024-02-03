@@ -13,6 +13,9 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
+		csrf: {
+			checkOrigin: false
+		},
 		alias: {
 			'$src/*': 'src/*'
 		}

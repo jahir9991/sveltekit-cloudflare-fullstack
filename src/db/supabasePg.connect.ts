@@ -1,5 +1,5 @@
 import postgres from 'postgres';
-import { SERVER_ENV } from '../SERVER_ENV';
+import { SERVER_ENV } from '../environments/SERVER_ENV';
 import { drizzle, type PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { schemaSupabase } from './schemas/schemaSupabase';
 

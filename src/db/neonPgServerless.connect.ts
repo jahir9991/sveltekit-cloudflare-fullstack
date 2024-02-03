@@ -1,6 +1,6 @@
 import { Pool } from '@neondatabase/serverless';
 import { NeonDatabase, drizzle } from 'drizzle-orm/neon-serverless';
-import { SERVER_ENV } from '../SERVER_ENV';
+import { SERVER_ENV } from '../environments/SERVER_ENV';
 import { schemaNeon } from './schemas/schemaNeon';
 import { ConnectNeonPgNode } from './neonPgNode.connect';
 import { dev } from '$app/environment';
