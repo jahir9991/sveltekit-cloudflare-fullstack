@@ -102,7 +102,7 @@ export class UserService {
 					console.error(error);
 				}
 			}
-			console.log('fron service', payload);
+			payload.password = await BcryptHelper.hash(payload.password);
 
 			const result = await DB.insert(this.model)
 				.values(payload)
